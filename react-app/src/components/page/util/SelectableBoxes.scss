@@ -1,0 +1,41 @@
+.selectable-boxes {
+	width: 90%;
+	margin: 30px auto;
+	flex-wrap: wrap;
+	display: flex;
+	justify-content: center;
+
+	.box {
+		height: 30px;
+		margin-top: 10px;
+		display: inline-block;
+		padding: 3px 6px;
+		text-align: center;
+		user-select: none;
+		cursor: pointer;
+		border: 1px solid rgba(0, 0, 0, 0);
+	}
+
+	.box + .box {
+		margin-left: 10px;
+	}
+
+	:nth-child(3n - 2) {
+		width: 16ch;
+		background-color: rgb(197, 194, 190);
+	}
+
+	:nth-child(3n - 1) {
+		width: 18ch;
+		background-color: blanchedalmond;
+	}
+
+	:nth-child(3n) {
+		width: 20ch;
+		background-color: rgb(219, 193, 158);
+	}
+
+	.selected {
+		border: 1px solid black;
+	}
+}

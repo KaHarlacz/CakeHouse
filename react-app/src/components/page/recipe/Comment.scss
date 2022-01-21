@@ -1,0 +1,27 @@
+.comment {
+	display: flex;
+	align-items: center;
+	margin: 1em auto;
+
+	.user-container {
+		min-width: 12ch;
+		.user {
+			margin: 0.7em 1em;
+		}
+	}
+
+	.text-section-border {
+    max-width: 80%;
+		padding: 0.5em;
+		word-wrap: break-word;
+		justify-content: center;
+		align-items: center;
+		border: 1px solid gray;
+		border-radius: 15px;
+		border-bottom-left-radius: 0;
+
+		.text-section {
+			overflow-wrap: break-word;
+		}
+	}
+}

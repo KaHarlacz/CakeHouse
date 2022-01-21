@@ -1,0 +1,47 @@
+@import './../../reset';
+
+.search-bar {
+	width: 350px;
+	height: 42px;
+	position: relative;
+	margin: 7vh auto 3vh;
+	padding: 0 10px;
+	border: 2px solid #737b80;
+	border-radius: 50px;
+
+	.elements-container {
+		width: 100%;
+		height: 100%;
+		vertical-align: middle;
+	}
+
+	.search-input {
+		border: none;
+		height: 100%;
+		width: 100%;
+		padding: 0px 5px;
+		border-radius: 50px;
+		font-size: 18px;
+		font-family: 'Nunito';
+		color: #424242;
+		font-weight: 500;
+	}
+
+	.search-input:focus {
+		outline: none;
+	}
+
+	.search-confirm {
+		cursor: pointer;
+	}
+
+	.icon {
+		width: 25px;
+		height: 25px;
+		path,
+		circle,
+		line {
+			color: #737b80;
+		}
+	}
+}

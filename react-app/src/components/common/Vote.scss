@@ -1,0 +1,14 @@
+.vote {
+	display: inline-flex;
+
+	.icon {
+		height: 1.6em;
+		width: 2em;
+	}
+
+	.votes-counter {
+    font-size: 1.1em;
+    transform: translateY(+0.1em);
+		font-weight: 500;
+	}
+}

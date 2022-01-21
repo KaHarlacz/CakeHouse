@@ -1,0 +1,55 @@
+@import './../../main';
+@import './../../reset';
+
+.main-page {
+	.content-wrapper {
+		width: 95%;
+		max-width: 1400px;
+		margin: auto;
+	}
+
+	.newest-container {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+
+		@media screen and (min-width: 992px) {
+			.newest-left {
+				width: 53%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+
+			.newest-right {
+				width: 47%;
+			}
+		}
+	}
+
+	.top-rated {
+		display: flex;
+
+		:nth-child(1).recipe-entries-container {
+			padding-right: 4px;
+		}
+
+		:nth-child(2).recipe-entries-container {
+			padding-left: 4px;
+			border-left: 1px solid rgba(0, 0, 0, 0.2);
+		}
+
+    .side-by-side-recipe-entry {
+      margin-top: 10px;
+    }
+	}
+
+	@media (max-width: 1070px) {
+		.top-rated {
+			flex-wrap: wrap;
+			.recipe-entries-container {
+				width: 100%;
+			}
+		}
+	}
+}

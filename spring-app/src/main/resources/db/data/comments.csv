@@ -1,0 +1,3 @@
+id,user_id,recipe_id,date_added,content
+1,1,1,CURDATE(),'Amazing recipe. I tried it once and everyone liked it.'
+2,2,1,CURDATE(),'It's good recipe but it's not my taste, or maybe I did something wrong.'

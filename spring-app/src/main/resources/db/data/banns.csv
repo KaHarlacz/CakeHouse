@@ -1,0 +1,2 @@
+id,user_id,ban_from,ban_to,cause
+1,2,'2021-12-15 00:00:00','2022-01-30 15:30:00','SQL injection attempt'

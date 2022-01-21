@@ -1,0 +1,58 @@
+.login-page {
+	display: flex;
+	flex-direction: column;
+
+	.logo-img {
+		width: calc(859px / 1.5);
+		height: calc(188px / 1.5);
+		margin: 50px auto 30px;
+		background-size: contain;
+		background-image: url('./logo.png');
+	}
+
+	.username-input,
+	.password-input {
+		width: 300px;
+		height: 50px;
+		margin: 10px auto;
+		display: flex;
+		align-items: center;
+		border: 2px solid gray;
+		border-radius: 50px;
+
+		.icon {
+			width: 40px;
+			height: 40px;
+			margin: 0 10px 0 5px;
+		}
+
+		input {
+			height: 40px;
+			width: 225px;
+			border: none;
+			font-size: 20px;
+			cursor: pointer;
+		}
+
+		input:focus {
+			outline: none;
+		}
+	}
+
+	.submit-button {
+		margin: 15px auto;
+		width: 150px;
+		height: 50px;
+		border-radius: 50px;
+		background-color: rgb(253, 244, 233);
+		cursor: pointer;
+		font-size: 20px;
+		letter-spacing: 1px;
+		text-transform: capitalize;
+		font-weight: 600;
+	}
+
+	.btn-redirect {
+		margin: auto;
+	}
+}

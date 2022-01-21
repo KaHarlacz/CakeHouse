@@ -1,0 +1,64 @@
+.h-text-sep {
+	margin-top: 20px;
+	text-align: center;
+	text-transform: uppercase;
+	h2 {
+		font-size: 20px;
+	}
+}
+
+.nav-bar {
+	height: 50px;
+}
+
+.items-container {
+	display: flex;
+	align-items: center;
+}
+
+.search-bar-container {
+	display: flex;
+	position: relative;
+	background-color: black;
+}
+
+.search-icon-container {
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	stroke: rgba(128, 128, 128, 0.8);
+}
+
+.search-input {
+	height: 25px;
+	border-radius: 20px;
+	border: 2px solid purple;
+	width: 200px;
+}
+
+.navbar-toggler-icon {
+	width: 20px;
+	height: 20px;
+}
+
+.logo-container {
+	display: flex;
+	justify-content: center;
+	height: 30px;
+	.icon {
+		stroke: orangered;
+		margin-right: 5px;
+	}
+}
+
+.search-bar {
+	display: flex;
+	align-items: center;
+	// .input-group {
+	// 	height: 20px;
+	// }
+	// .form-control {
+	// 	height: 20px;
+	// }
+}
+

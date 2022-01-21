@@ -1,0 +1,5 @@
+/react-app/build/
+/react-app/node_modules/
+/spring-app/.idea/
+/spring-app/.mvn/
+/spring-app/target/

@@ -1,0 +1,153 @@
+.recipe-page {
+	.recipe-header {
+		display: flex;
+		flex-direction: column;
+
+		.name {
+			margin: 50px 0 20px;
+			font-size: 1.8em;
+			text-align: center;
+		}
+
+		.description {
+			font-size: 1em;
+			font-weight: 500;
+			text-align: center;
+		}
+
+		.recipe-header-bottom {
+			display: flex;
+			align-items: center;
+			justify-content: space-around;
+			margin: 20px 0 5px;
+		}
+	}
+
+	.image {
+		margin: 10px auto;
+		width: 90%;
+
+		img {
+			width: 100%;
+			border-radius: 40px;
+		}
+	}
+
+	.preparation {
+		width: 80%;
+		margin: 1.5em auto;
+
+		h3 {
+			text-align: center;
+			margin: 0.4em auto;
+		}
+
+		p {
+			line-height: 1.4em;
+			letter-spacing: 0.05em;
+			text-indent: 2em;
+		}
+	}
+
+	.ingredients {
+		width: 80%;
+		margin: 2em auto;
+
+		h3 {
+			text-align: center;
+			margin: 0.4em auto 1em;
+		}
+
+		ul {
+			width: 15em;
+			margin: auto;
+			padding-left: 20px;
+			line-height: 1.4em;
+			letter-spacing: 0.05em;
+
+			li {
+				margin-top: 0.5em;
+			}
+		}
+	}
+
+	.categories {
+		width: 80%;
+		margin: 2em auto;
+
+		h3 {
+			text-align: center;
+			margin: 0.4em auto 1em;
+		}
+
+		.selectable-boxes {
+			margin: 0 auto;
+		}
+	}
+
+	.comments {
+		width: 80%;
+		margin: auto;
+		border-top: 1px solid gray;
+		border-bottom: 1px solid gray;
+
+		h3 {
+			margin: 1.5em auto 1em;
+			text-align: center;
+		}
+
+		.leave-a-comment {
+			width: 80%;
+			margin: 2em auto 1.2em;
+			text-align: center;
+		}
+
+		.comment {
+			width: 90%;
+		}
+
+		:last-child.comment {
+			margin-bottom: 2em;
+		}
+	}
+
+	.add-comment-section {
+		text-align: center;
+		h3 {
+			margin: 1em auto 0.7em;
+		}
+		textarea {
+			font-size: 1.3em;
+			padding: 0.4em;
+			width: 40ch;
+			height: 20ch;
+		}
+		button {
+			width: 100px;
+			height: 40px;
+			border-radius: 5%;
+			border: 1px solid gray;
+			font-size: 1em;
+			cursor: pointer;
+			background-color: hsla(0, 25%, 81%, 0.7);
+		}
+		button:active {
+			background-color: hsla(0, 25%, 81%, 1);
+		}
+	}
+
+  .add-comment-popup {
+    width: 80%;
+    height: 80px;
+    margin: 2em auto 1em;
+    text-transform: uppercase;
+    border: 1px solid gray;
+    background-color: rgba(255, 99, 71, 0.432);
+    visibility: hidden;
+
+    p {
+      text-align: center;
+      line-height: 80px;
+    }
+  }
+}
