@@ -17,6 +17,7 @@ public class SpringAppApplication {
     private static ApplicationContext context;
 
     public static void main(String[] args) throws Exception {
+//        System.getenv().keySet().forEach(System.out::println);
         SpringApplication.run(SpringAppApplication.class, args);
     }
 
