@@ -1,6 +1,6 @@
 # CakeHouse
 
-This is my first app which I wrote using Spring framework and React.
+This app is an implementation of a website that allows users to share, discover and vote for their favorite recipes. It's the first app that I wrote using the Spring framework and React.
 
 ## How to run this app
 
