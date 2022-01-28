@@ -6,7 +6,7 @@ This is my first app which I wrote using Spring framework and React.
 
 At this stage, it is possible to run this app on your machine but there is no database configured to store data. I will make this app run in docker containers which will solve this problem.
 
-# Patterns used
+## Patterns used
 
 Design patterns: 
   - Adapter
