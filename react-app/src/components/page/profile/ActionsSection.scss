@@ -1,0 +1,34 @@
+.actions-section {
+	border: 1px solid gray;
+	border-collapse: collapse;
+	display: flex;
+	flex-direction: column;
+
+	.action-option {
+		display: inline-flex;
+		font-size: 1em;
+		padding: 10px 25px;
+		transition: background-color 0.3s;
+
+		.icon {
+			align-self: center;
+			height: 1.5em;
+			width: 1.5em;
+		}
+
+		p {
+			margin-left: 15px;
+			transform: translateY(+0.25em);
+			font-weight: 500;
+		}
+	}
+
+	.action-option ~ .action-option {
+		border-top: 1px solid gray;
+	}
+
+	.action-option:hover {
+		background-color: hsl(0, 26%, 61%, 0.3);
+        cursor: pointer;
+	}
+}

@@ -1,0 +1,42 @@
+.items-list {
+	border-collapse: collapse;
+	margin: auto;
+
+	td,
+	th {
+		border: 1px solid black;
+		padding: 10px;
+        text-align: center;
+	}
+
+	th {
+		color: rgba(0, 0, 0, 0.85);
+	}
+
+	td:last-child,
+	td:first-child {
+		border: none;
+		padding: 0;
+		width: 50px;
+		align-items: center;
+	}
+
+	th:first-child,
+	th:last-child {
+		padding: 0;
+		width: 50px;
+		visibility: hidden;
+		border: none;
+		align-items: center;
+	}
+
+	.icon {
+		height: 30px;
+		opacity: 0.6;
+	}
+
+	.icon:hover {
+		opacity: 1;
+		cursor: pointer;
+	}
+}

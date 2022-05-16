@@ -7,16 +7,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class UserService {
+public class UserAuthService {
 
     private final UserRepo userRepo;
 
-    public AuthResponse authenticate(AuthPost authPost) {
+    public AuthResponse login(AuthPost authPost) {
         // TODO: optimize
-        final var user = userRepo
+        var user = userRepo
                 .findByUsernameAndPassword(authPost.getUsername(), authPost.getPassword());
         if (user.isPresent()) {
-            final var userId = userRepo.findUserIdByUsername(authPost.getUsername());
+            var userId = userRepo.findUserIdByUsername(authPost.getUsername());
             return AuthResponse.of(userId);
         }
         return AuthResponse.of(null);

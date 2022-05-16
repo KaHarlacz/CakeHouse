@@ -18,14 +18,17 @@ import java.io.File;
 @AllArgsConstructor
 public class DataSourceConfig {
 
-    @Bean
-    public static DataSource getDataSource() throws ConfigurationException {
-        // Manual bean creation in order to get env variables
-        final var envVars = System.getenv();
-        final var dataSourceBuilder = DataSourceBuilder.create();
-        dataSourceBuilder.url(envVars.get("CAKEHOUSE_DATABASE_URL"));
-        dataSourceBuilder.username(envVars.get("CAKEHOUSE_DATABASE_USERNAME"));
-        dataSourceBuilder.password(envVars.get("CAKEHOUSE_DATABASE_PASSWORD"));
-        return dataSourceBuilder.build();
-    }
+//    @Bean
+//    public static DataSource getDataSource() throws ConfigurationException {
+//        // Manual bean creation in order to get env variables
+//        final var envVars = System.getenv();
+//        final var dataSourceBuilder = DataSourceBuilder.create();
+//        final var url = "jdbc:mysql://" + envVars.get("CAKEHOUSE_DATABASE_URL") +
+//                "/cake_house?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC" +
+//                "&createDatabaseIfNotExist=true";
+//        dataSourceBuilder.url(url);
+//        dataSourceBuilder.username(envVars.get("CAKEHOUSE_DATABASE_USERNAME"));
+//        dataSourceBuilder.password(envVars.get("CAKEHOUSE_DATABASE_PASSWORD"));
+//        return dataSourceBuilder.build();
+//    }
 }

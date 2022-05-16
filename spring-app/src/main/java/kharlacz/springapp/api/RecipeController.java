@@ -1,5 +1,6 @@
 package kharlacz.springapp.api;
 
+import kharlacz.springapp.recipe.PostRecipeDto;
 import kharlacz.springapp.recipe.RecipeEntryDetails;
 import kharlacz.springapp.recipe.RecipeEntryPreview;
 import kharlacz.springapp.recipe.RecipeServiceFacade;
@@ -9,6 +10,7 @@ import kharlacz.springapp.recipe.comment.post.CommentPost;
 import kharlacz.springapp.recipe.comment.post.CommentPostResponse;
 import kharlacz.springapp.user.authentication.BasicAuthString;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -51,5 +53,10 @@ public class RecipeController {
     @GetMapping("/recipe/{id}/comments")
     List<CommentDto> getCommentsForRecipe(@PathVariable long id) {
         return recipeServiceFacade.getCommentsForRecipe(id);
+    }
+    
+    @PostMapping("/recipes")
+    PostRecipeDto addRecipe(@RequestBody PostRecipeDto recipeDto) {
+        return recipeDto;
     }
 }

@@ -65,7 +65,7 @@ export default function LoginPage(props) {
 					<circle cx='12' cy='16' r='1'></circle>
 					<path d='M8 11v-5a4 4 0 0 1 8 0'></path>
 				</svg>
-				<input type='password' placeholder='****' className='password'></input>
+				<input type='password' placeholder='password' className='password'></input>
 			</div>
 			<button className='submit-button' onClick={() => handleLogin()}>
 				log in

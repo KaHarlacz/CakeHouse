@@ -1,0 +1,16 @@
+.autosized-text-area {
+	width: 90%;
+	font-size: 1.2em;
+	margin-top: 40px;
+	text-align: center;
+	outline: 0;
+	border: 0;
+	overflow: hidden;
+	padding: 10px;
+	margin: auto;
+	display: block;
+}
+
+.autosized-text-area:not(:placeholder-shown) {
+	text-align: left;
+}

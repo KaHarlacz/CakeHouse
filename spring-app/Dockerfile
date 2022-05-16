@@ -1,16 +1,17 @@
-# syntax=docker/dockerfile:1
-
 FROM openjdk:16-alpine3.13
 
-WORKDIR /spring-app
+ARG JAR_FILE
 
-COPY .mvn .mvn
-COPY mvnw .
-COPY pom.xml .
+ENV DATABASE_URL $DATABASE_URL
+ENV DATABASE_DIALECT $DATABASE_DIALECT
 
-RUN dos2unix mvnw
-RUN ./mvnw dependency:go-offline -B
+ENV CAKEHOUSE_EMAIL_ADDRESS $CAKEHOUSE_EMAIL_ADDRESS
+ENV CAKEHOUSE_EMAIL_PASSWORD $CAKEHOUSE_EMAIL_PASSWORD
+ENV CAKEHOUSE_EMAIL_HOST $CAKEHOUSE_EMAIL_HOST
+ENV CAKEHOUSE_EMAIL_SMTP_PORT $CAKEHOUSE_EMAIL_SMTP_PORT
 
-COPY src src
+COPY ${JAR_FILE} app.jar
 
-CMD ["./mvnw", "spring-boot:run"]
+CMD java \
+    -Djava.security.egd=file:/dev/./urandom \
+    -jar /app.jar

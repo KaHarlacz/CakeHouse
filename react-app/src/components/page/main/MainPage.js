@@ -8,6 +8,8 @@ import './MainPage.scss';
 import SimpleRecipeEntry from '../../recipe/SimpleRecipeEntry';
 import Footer from '../util/Footer';
 
+require('dotenv').config();
+
 function MainPage(props) {
 	let [newest, setNewest] = useState([]);
 
@@ -16,6 +18,8 @@ function MainPage(props) {
 			.then(data => setNewest(data))
 			.catch(err => console.log(err));
 	}, [setNewest]);
+
+  console.log(process.env)
 
 	return (
 		<div className='main-page'>

@@ -32,7 +32,7 @@ export function getUsername() {
 
 export function getBanForCurUser() {
 	return new Promise((resolve, reject) => {
-		fetch('http://localhost:8080/user/ban', {
+		fetch(`${process.env.REACT_APP_CAKEHOUSE_BACKEND_URL}/user/ban`, {
 			method: 'GET',
 			headers: {
 				Accept: '*/*',
@@ -47,7 +47,7 @@ export function getBanForCurUser() {
 
 export async function auth(username, password) {
 	return new Promise((resolve, reject) => {
-		fetch('http://localhost:8080/user', {
+		fetch(`${process.env.REACT_APP_CAKEHOUSE_BACKEND_URL}/user`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

@@ -13,22 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EntityScan
 public class SpringAppApplication {
 
-    @Autowired
-    private static ApplicationContext context;
-
     public static void main(String[] args) throws Exception {
-//        System.getenv().keySet().forEach(System.out::println);
         SpringApplication.run(SpringAppApplication.class, args);
-    }
-
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH");
-            }
-        };
     }
 }

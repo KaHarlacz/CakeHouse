@@ -115,7 +115,12 @@
 			<artifactId>commons-configuration2</artifactId>
 			<version>2.7</version>
 		</dependency>
-
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>spring-mock-mvc</artifactId>
+			<version>4.5.1</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -173,27 +178,6 @@
           </execution>
         </executions>
       </plugin>
-      <!--			<plugin>-->
-<!--				&lt;!&ndash;start with basic information to get Liquibase plugin:-->
-<!--        include <groupId>, <artifactID>, and <version> elements&ndash;&gt;-->
-<!--				<groupId>org.liquibase</groupId>-->
-<!--				<artifactId>liquibase-maven-plugin</artifactId>-->
-<!--				<version>4.2.0</version>-->
-<!--				<configuration>-->
-<!--					&lt;!&ndash;set values for Liquibase properties and settings-->
-<!--          for example, the location of a properties file to use&ndash;&gt;-->
-<!--					<propertyFile>liquibase.properties</propertyFile>-->
-<!--				</configuration>-->
-<!--				<dependencies>-->
-<!--					&lt;!&ndash;set up any dependencies for Liquibase to function in your-->
-<!--          environment for example, a database-specific plugin&ndash;&gt;-->
-<!--					<dependency>-->
-<!--						<groupId>org.liquibase.ext</groupId>-->
-<!--						<artifactId>liquibase-<dbname></artifactId>-->
-<!--						<version>4.2.1</version>-->
-<!--					</dependency>-->
-<!--				</dependencies>-->
-<!--			</plugin>-->
 		</plugins>
 	</build>
 

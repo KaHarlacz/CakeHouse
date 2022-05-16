@@ -4,9 +4,9 @@ import kharlacz.springapp.recipe.Recipe;
 import kharlacz.springapp.recipe.RecipeRepo;
 import kharlacz.springapp.recipe.comment.post.CommentPost;
 import kharlacz.springapp.recipe.comment.post.CommentPostResponse;
-import kharlacz.springapp.user.authentication.BasicAuthString;
 import kharlacz.springapp.user.User;
 import kharlacz.springapp.user.UserRepo;
+import kharlacz.springapp.user.authentication.BasicAuthString;
 import kharlacz.springapp.user.ban.BanService;
 import kharlacz.springapp.user.notification.NotificationService;
 import kharlacz.springapp.util.content.filter.ContentFilterService;
@@ -14,7 +14,8 @@ import kharlacz.springapp.util.content.filter.Reservation;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,7 +28,7 @@ public class CommentService {
     private final CommentRepo commentRepo;
     private final RecipeRepo recipeRepo;
     private final UserRepo userRepo;
-    
+
     public CommentDto getComment(long id) {
         return commentRepo.findById(id)
                 .map(comment -> CommentDto.builder()
@@ -37,7 +38,7 @@ public class CommentService {
                         .build())
                 .orElse(new CommentDto());
     }
-    
+
     public List<CommentDto> getCommentsForRecipe(long recipeId) {
         return commentRepo.findByTargetRecipe_Id(recipeId)
                 .stream()
@@ -96,5 +97,9 @@ public class CommentService {
         final var user = recipe.orElseThrow()
                 .getAuthor();
         notificationService.notifyRecipeWasCommented(user);
+    }
+
+    private int getCommentsCountAddedByUser(long userId) {
+        return commentRepo.countByAuthor_Id(userId);
     }
 }

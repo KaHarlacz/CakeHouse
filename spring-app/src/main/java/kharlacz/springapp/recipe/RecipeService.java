@@ -43,4 +43,8 @@ public class RecipeService {
                 .map(RecipeEntryPreviewMapper::map)
                 .collect(Collectors.toList());
     }
+    
+    public void addRecipe() {
+        
+    }
 }

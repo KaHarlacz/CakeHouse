@@ -41,7 +41,7 @@ export default function RecipePage() {
 	}, [setUser]);
 
 	const handleAddComment = commentContent => {
-		fetch('http://localhost:8080/recipe/comment', {
+		fetch(`${process.env.REACT_APP_CAKEHOUSE_BACKEND_URL}/recipe/comment`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

@@ -1,0 +1,20 @@
+.profile-stat {
+	display: inline-block;
+    padding: 10px;
+
+	.stat-name {
+		display: inline-block;
+        margin-bottom: 0.2em;
+		font-weight: bold;
+		text-transform: uppercase;
+        color: rgb(36, 35, 35);
+	}
+
+	.stat-value {
+		display: inline-block;
+		font-weight: bold;
+		color: gray;
+	}
+	.stat-uom {
+	}
+}

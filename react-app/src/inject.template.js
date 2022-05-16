@@ -1,0 +1,4 @@
+window.injectedEnv = {
+  NODE_ENV: '${NODE_ENV}',
+  CAKEHOUSE_DATABASE_URL: '${CAKEHOUSE_DATABASE_URL}',
+};

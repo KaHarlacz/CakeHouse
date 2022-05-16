@@ -1,0 +1,19 @@
+.stats-section {
+	display: flex;
+	padding: 10px 0;
+
+	.left {
+		display: flex;
+		flex-direction: column;
+		padding-left: 20px;
+		width: 50%;
+		border-right: 1px solid black;
+	}
+
+	.right {
+		display: flex;
+		flex-direction: column;
+		padding-left: 20px;
+		width: 50%;
+	}
+}

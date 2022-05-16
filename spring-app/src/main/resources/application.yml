@@ -1,26 +1,40 @@
-spring:
-#  datasource:
+#  CAKEHOUSE_DATABASE_URL=localhost:3307/cakehouse;CAKEHOUSE_DATABASE_USERNAME=root;CAKEHOUSE_DATABASE_PASSWORD=linki
+
 #    url: ${env:CAKEHOUSE_DATABASE_URL}?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true
-#    username: ${env:CAKEHOUSE_DATABASE_USERNAME}
-#    password: ${env:CAKEHOUSE_DATABASE_PASSWORD}
+  #    username: ${env:CAKEHOUSE_DATABASE_USERNAME}
+  #    password: ${env:CAKEHOUSE_DATABASE_PASSWORD}
+
+#spring:
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/cakehouse?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=True
+#    username: root
+#    password: linki
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: create-drop
+##    defer-datasource-initialization: false
+#    database-platform: org.hibernate.dialect.MySQL5Dialect
+##  sql:
+##    init:
+##      mode: always
+#    
+#notification:
+#  email: CAKEHOUSE_EMAIL_USERNAME
+#  password: CAKEHOUSE_EMAIL_PASSWORD
+#
+##    
+#test:
+#  email: SECRET
+#  password: SECRET
+
+spring:
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: validate
-    defer-datasource-initialization: false
-  sql:
-    init:
-      mode: always
+    database-platform: org.hibernate.dialect.MySQL5Dialect
   liquibase:
     change-log: classpath:db/master.xml
     enabled: true
     drop-first: true
-    
-notification:
-  email: SECRET
-  password: SECRET
-    
-test:
-  email: SECRET
-  password: SECRET
-        

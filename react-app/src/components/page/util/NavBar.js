@@ -10,10 +10,9 @@ export default function NavBar(props) {
 	);
 
 	if (getCreditentialsBasic()) {
-		const userId = getUserId();
 		userLink = (
 			<li>
-				<Link to={`/profile/${userId}`}>Profile</Link>
+				<Link to={`/profile`}>Profile</Link>
 			</li>
 		);
 	}

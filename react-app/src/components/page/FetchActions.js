@@ -1,5 +1,7 @@
+import { getUserId } from './CreditentialsActions';
+
 export default function fetchNewestEntries() {
-	return fetchEntries('http://localhost:8080/recipes/newest');
+	return fetchEntries(`${process.env.REACT_APP_CAKEHOUSE_BACKEND_URL}/recipes/newest`);
 }
 
 export function fetchTopRatedEntries() {
@@ -8,12 +10,12 @@ export function fetchTopRatedEntries() {
 }
 
 export function fetchCategoryEntries(categoryId) {
-	return fetchEntries(`http://localhost:8080/recipes/category/${categoryId}`);
+	return fetchEntries(`${process.env.REACT_APP_CAKEHOUSE_BACKEND_URL}/recipes/category/${categoryId}`);
 }
 
 export function fetchCategories() {
 	return new Promise((resolve, reject) => {
-		fetch('http://localhost:8080/categories')
+		fetch(`${process.env.REACT_APP_CAKEHOUSE_BACKEND_URL}/categories`)
 			.then(data => data.json())
 			.then(resolve)
 			.catch(reject);
@@ -24,7 +26,7 @@ export function fetchCategories() {
 
 export function fetchRecipe(id) {
 	return new Promise((resolve, reject) => {
-		fetch(`http://localhost:8080/recipe/${id}`)
+		fetch(`${process.env.REACT_APP_CAKEHOUSE_BACKEND_URL}/recipe/${id}`)
 			.then(res => res.json())
 			.then(data => transformRecipe(data))
 			.then(resolve)
@@ -54,6 +56,7 @@ function fetchEntries(url) {
 	console.log(encodedCreditentials);
 	return new Promise((resolve, reject) => {
 		fetch(url, {
+			mode: 'cors',
 			method: 'GET',
 			headers: {
 				Authorization: 'Basic ' + encodedCreditentials,
@@ -84,4 +87,13 @@ function transformEntries(data) {
 
 function base64ToImage(b64String) {
 	return `data:image/png;base64,${b64String}`;
+}
+
+export function fetchUserStats() {
+	return new Promise((resolve, reject) => {
+		fetch(`${process.env.REACT_APP_CAKEHOUSE_BACKEND_URL}/users/${getUserId()}/stats`)
+			.then(res => res.json())
+			.then(resolve)
+			.catch(reject);
+	});
 }

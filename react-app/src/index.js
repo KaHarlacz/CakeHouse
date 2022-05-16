@@ -6,6 +6,8 @@ import MainPage from './components/page/main/MainPage';
 import LoginPage from './components/page/login/LoginPage';
 import RecipePage from './components/page/recipe/RecipePage';
 import WebFont from 'webfontloader';
+import ProfilePage from './components/page/profile/ProfilePage';
+import AddRecipePage from './components/page/recipe/AddRecipePage';
 
 const rootElement = document.getElementById('root');
 
@@ -26,7 +28,9 @@ render(
 			<Route path='/home' element={<MainPage />} />
 			<Route path='discover' element={<DiscoverPage />} />
 			<Route path='login' element={<LoginPage />} />
+			<Route path='profile' element={<ProfilePage />} />
 			<Route path='recipe/:id' element={<RecipePage />} />
+			<Route path='recipe' element={<AddRecipePage />} />
 		</Routes>
 	</BrowserRouter>,
 	rootElement

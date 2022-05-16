@@ -1,16 +1,11 @@
 package kharlacz.springapp.user.ban;
 
-import kharlacz.springapp.user.User;
 import kharlacz.springapp.user.UserRepo;
 import kharlacz.springapp.util.content.filter.Reservation;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-
-import static java.util.Calendar.HOUR_OF_DAY;
 
 @Service
 @AllArgsConstructor
@@ -33,8 +28,7 @@ public class BanService {
         final var banHours = summarizeBanDuration(reservations);
         final var user = userRepo.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("Cannot ban not existing user."));
-
-        final var ban = createBan(user, cause, banHours);
+        final var ban = Ban.of(user, cause, banHours);
         banRepo.save(ban);
     }
 
@@ -42,7 +36,7 @@ public class BanService {
         final var causeBuilder = new StringBuilder();
         reservations.stream()
                 .map(Reservation::getMessage)
-                .forEach(m -> causeBuilder.append(m).append("\n"));
+                .forEach(msg -> causeBuilder.append(msg).append("\n"));
         return causeBuilder.toString();
     }
 
@@ -50,21 +44,5 @@ public class BanService {
         return reservations.stream()
                 .map(Reservation::getPenaltyHours)
                 .reduce(0, Integer::sum);
-    }
-
-    private Ban createBan(User user, String cause, int banHours) {
-        return Ban.builder()
-                .cause(cause)
-                .user(user)
-                .from(new Date())
-                .to(getBanEndDate(banHours))
-                .build();
-    }
-
-    private Date getBanEndDate(int banHours) {
-        final var calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        calendar.add(HOUR_OF_DAY, banHours);
-        return calendar.getTime();
     }
 }
