@@ -1,28 +1,12 @@
 # CakeHouse
 
-This is my first app which I wrote using Spring framework and React.
+This app is an implementation of a website that allows users to share, discover and vote for their favorite recipes. It's the first app that I wrote using the Spring framework and React.
 
 ## How to run this app
 
 At this stage, it is possible to run this app on your machine but there is no database configured to store data. I will make this app run in docker containers which will solve this problem.
 
-Environment variables:
-
-REACT_APP_CAKEHOUSE_BACKEND_URL - URL which localize backend of the app
-
-CAKEHOUSE_DATABASE_USERNAME
-CAKEHOUSE_DATABASE_PASSWORD
-CAKEHOUSE_DATABASE_URL
-
-App can send email notifications to users whose recipes were commented.
-To make this feature work below optional env variables should be passed:
-CAKEHOUSE_EMAIL_ADDRESS
-CAKEHOUSE_EMAIL_PASSWORD
-CAKEHOUSE_EMAIL_HOST
-CAKEHOUSE_EMAIL_SMTP_PORT
-
-
-# Patterns used
+## Patterns used
 
 Design patterns: 
   - Adapter
