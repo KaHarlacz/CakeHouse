@@ -1,4 +1,4 @@
-package kharlacz.springapp.recipe;
+package kharlacz.springapp.recipe.services.dto;
 
 import kharlacz.springapp.recipe.category.RecipeCategoryDto;
 import kharlacz.springapp.recipe.comment.CommentDto;
@@ -13,7 +13,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class RecipeEntryDetails {
+public class RecipeDetails {
     private Long id;
     private String name;
     private String desc;

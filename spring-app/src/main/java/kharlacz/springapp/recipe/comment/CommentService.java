@@ -1,16 +1,10 @@
 package kharlacz.springapp.recipe.comment;
 
 import kharlacz.springapp.recipe.Recipe;
-import kharlacz.springapp.recipe.RecipeRepo;
-import kharlacz.springapp.recipe.comment.post.CommentPost;
-import kharlacz.springapp.recipe.comment.post.CommentPostResponse;
-import kharlacz.springapp.user.User;
+import kharlacz.springapp.recipe.comment.post.CommentReq;
+import kharlacz.springapp.recipe.comment.post.CommentRes;
 import kharlacz.springapp.user.UserRepo;
-import kharlacz.springapp.user.authentication.BasicAuthString;
-import kharlacz.springapp.user.ban.BanService;
-import kharlacz.springapp.user.notification.NotificationService;
 import kharlacz.springapp.util.content.filter.ContentFilterService;
-import kharlacz.springapp.util.content.filter.Reservation;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,10 +17,7 @@ import java.util.stream.Collectors;
 public class CommentService {
 
     private final ContentFilterService contentFilterService;
-    private final NotificationService notificationService;
-    private final BanService banService;
     private final CommentRepo commentRepo;
-    private final RecipeRepo recipeRepo;
     private final UserRepo userRepo;
 
     public CommentDto getComment(long id) {
@@ -46,60 +37,25 @@ public class CommentService {
                 .collect(Collectors.toList());
     }
 
-    public CommentPostResponse addComment(CommentPost comment, BasicAuthString creditentials) {
+    public CommentRes addComment(long recipeId, CommentReq commentReq) {
         final var reservationsToComment =
-                contentFilterService.filterContentBeingSaved(comment.getContent());
+                contentFilterService.filterContentBeingSaved(commentReq.comment());
         final var isSafeComment = reservationsToComment.isEmpty();
 
         if (!isSafeComment) {
-            banUser(creditentials.getUsername(), reservationsToComment);
-            return CommentPostResponse.fail("Inappropriate content detected. You were banned.");
+            return CommentRes.fail("Cannot add comment with bad language or html tags");
         }
-        addCommentToDb(comment, creditentials.getUsername());
-        notifyRecipeAuthor(comment.getRecipeId());
-        return CommentPostResponse.success("Comment successfully added.");
-    }
-
-    private void banUser(String username, List<Reservation> reservationsToComment) {
-        banService.banUser(username, reservationsToComment);
-    }
-
-    private void addCommentToDb(CommentPost comment, String author) {
-        final var user = getUserByUsername(author);
-        final var recipe = getRecipeById(comment.getRecipeId());
-
+        
+        // TODO: Throw sensible exception
+        var author = userRepo.findByUsername(commentReq.username())
+                        .orElseThrow();
+        
         commentRepo.save(Comment.builder()
-                .author(user)
-                .targetRecipe(recipe)
+                .author(author)
+                .content(commentReq.comment())
                 .dateAdded(new Date())
-                .content(comment.getContent())
+                .targetRecipe(Recipe.builder().id(recipeId).build())
                 .build());
-    }
-
-    private User getUserByUsername(String username) {
-        return userRepo
-                .findByUsername(username)
-                .orElseThrow(() ->
-                        new IllegalArgumentException("Comment must be linked to existing user.")
-                );
-    }
-
-    private Recipe getRecipeById(long recipeId) {
-        return recipeRepo
-                .findById(recipeId)
-                .orElseThrow(() ->
-                        new IllegalArgumentException("Comment target recipe must exist.")
-                );
-    }
-
-    private void notifyRecipeAuthor(long recipeId) {
-        final var recipe = recipeRepo.findById(recipeId);
-        final var user = recipe.orElseThrow()
-                .getAuthor();
-        notificationService.notifyRecipeWasCommented(user);
-    }
-
-    private int getCommentsCountAddedByUser(long userId) {
-        return commentRepo.countByAuthor_Id(userId);
+        return CommentRes.success("Comment successfully added.");
     }
 }

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.io.Serializable;
 
 @Entity(name = "recipe_to_ingredient")
@@ -25,6 +26,7 @@ public class IngredientWithQuantity {
     @JoinColumn(name = "ingredient_id", insertable = false, updatable = false)
     private Ingredient ingredient;
     
+    @Min(0)
     private double quantity;
     
     @Embeddable

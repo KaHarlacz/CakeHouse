@@ -9,4 +9,6 @@ public interface CommentRepo extends JpaRepository<Comment, Long> {
     List<Comment> findByTargetRecipe_Id(long recipeId);
     
     int countByAuthor_Id(long id);
+    
+    int countCommentsByAuthor_Username(String username);
 }

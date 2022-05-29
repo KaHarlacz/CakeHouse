@@ -14,12 +14,13 @@ public class UserStatsService {
     private final RecipeRepo recipeRepo;
     private final CommentRepo commentRepo;
 
-    public UserStats getProfileDetails(long userId) {
-        var user = userRepo.findById(userId).orElseThrow();
-        var recipesCount = recipeRepo.countByAuthor_Id(userId);
-        var commentCount = commentRepo.countByAuthor_Id(userId);
-        var userRating = recipeRepo.sumRatingOfUserRecipes(userId);
-        var bestRecipe = recipeRepo.findFirstByAuthor_IdOrderByRatingDesc(userId)
+    public UserStats getUserStats(String username) {
+        // TODO: Throw some sensible exceptions
+        var user = userRepo.findByUsername(username).orElseThrow();
+        var recipesCount = recipeRepo.countRecipesByAuthor_Username(username);
+        var commentCount = commentRepo.countCommentsByAuthor_Username(username);
+        var userRating = recipeRepo.sumRatingsOfUserRecipes(username);
+        var bestRecipe = recipeRepo.findFirstByAuthor_UsernameOrderByRating(username)
                 .map(Recipe::getName).orElseThrow();
         return UserStats.builder().commentsAdded(commentCount).recipesAdded(recipesCount)
                 .bestRecipe(bestRecipe).userRating(userRating).username(user.getUsername())

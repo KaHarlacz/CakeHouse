@@ -1,4 +1,4 @@
-package kharlacz.springapp;
+package kharlacz.springapp.config.db;
 
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;

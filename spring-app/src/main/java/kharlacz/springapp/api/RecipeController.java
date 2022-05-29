@@ -1,16 +1,15 @@
 package kharlacz.springapp.api;
 
-import kharlacz.springapp.recipe.PostRecipeDto;
-import kharlacz.springapp.recipe.RecipeEntryDetails;
-import kharlacz.springapp.recipe.RecipeEntryPreview;
-import kharlacz.springapp.recipe.RecipeServiceFacade;
-import kharlacz.springapp.recipe.category.RecipeCategoryDto;
-import kharlacz.springapp.recipe.comment.CommentDto;
-import kharlacz.springapp.recipe.comment.post.CommentPost;
-import kharlacz.springapp.recipe.comment.post.CommentPostResponse;
-import kharlacz.springapp.user.authentication.BasicAuthString;
+import kharlacz.springapp.recipe.comment.post.CommentReq;
+import kharlacz.springapp.recipe.comment.post.CommentRes;
+import kharlacz.springapp.recipe.services.dto.RecipeDetails;
+import kharlacz.springapp.recipe.services.dto.RecipePreview;
+import kharlacz.springapp.recipe.services.RecipeFacadeService;
+import kharlacz.springapp.recipe.services.commands.SearchRecipeCommand;
+import kharlacz.springapp.recipe.services.commands.UploadRecipeCommand;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,44 +18,35 @@ import java.util.List;
 @AllArgsConstructor
 public class RecipeController {
 
-    private final RecipeServiceFacade recipeServiceFacade;
-
-    @GetMapping("/recipes/newest")
-    List<RecipeEntryPreview> getNewestRecipes(
-            @RequestParam(required = false, defaultValue = "15") int count) {
-        return recipeServiceFacade.getNewestRecipes(count);
+    private final RecipeFacadeService recipeServiceFacade;
+    
+    @GetMapping("/recipes/search")
+    Page<RecipePreview> searchRecipes(SearchRecipeCommand searchReqDto) {
+        return recipeServiceFacade.searchRecipes(searchReqDto);
     }
 
-    @GetMapping("/recipe/{id}")
-    RecipeEntryDetails getRecipe(@PathVariable long id) {
+    @GetMapping("/recipes/{id}")
+    RecipeDetails getRecipe(@PathVariable long id) {
         return recipeServiceFacade.getRecipeDetails(id);
     }
-
-    @GetMapping("/recipes/category/{id}")
-    List<RecipeEntryPreview> getRecipesByCategory(@PathVariable long id) {
-        return recipeServiceFacade.getRecipesOfCategory(id);
-    }
-
-    @GetMapping("/categories")
-    List<RecipeCategoryDto> getCategoriesNames() {
-        return recipeServiceFacade.getRecipesCategories();
-    }
-
-    @PostMapping("/recipe/comment")
-    @ResponseBody
-    CommentPostResponse addComment(
-            @RequestBody CommentPost comment,
-            @RequestHeader(name = "authorization") BasicAuthString creditentials) {
-        return recipeServiceFacade.commentRecipe(comment, creditentials);
-    }
-
-    @GetMapping("/recipe/{id}/comments")
-    List<CommentDto> getCommentsForRecipe(@PathVariable long id) {
-        return recipeServiceFacade.getCommentsForRecipe(id);
-    }
     
-    @PostMapping("/recipes")
-    PostRecipeDto addRecipe(@RequestBody PostRecipeDto recipeDto) {
-        return recipeDto;
+    @GetMapping("/recipes/categories")
+    List<String> getCategoriesNames() {
+        return recipeServiceFacade.getCategoriesNames();
+    }
+
+    // TODO: There is possibility to comment as another user! To be fixed
+    @PostMapping("/recipes/{id}/comment")
+    @ResponseStatus(HttpStatus.CREATED)
+    CommentRes addComment(
+            @PathVariable("id") long recipeId,
+            @RequestBody CommentReq commentReq) {
+        return recipeServiceFacade.commentRecipe(recipeId, commentReq);
+    }
+
+    @PostMapping("/recipes/upload")
+    @ResponseStatus(HttpStatus.CREATED)
+    void addRecipe(@RequestBody UploadRecipeCommand recipeCmd) {
+        recipeServiceFacade.addRecipe(recipeCmd);
     }
 }

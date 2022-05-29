@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProfileController {
 
     private final UserStatsService userDetailsService;
-
-    @GetMapping("/users/{id}/stats")
-    UserStats getProfileDetails(@PathVariable long id) {
-        return userDetailsService.getProfileDetails(id);
-    }
+//
+//    @GetMapping("/users/{id}/stats")
+//    UserStats getProfileDetails(@PathVariable long id) {
+//        return userDetailsService.getUserStats(id);
+//    }
 
 }

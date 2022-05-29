@@ -21,14 +21,14 @@ CREATE TABLE ban
         ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS unit;
-CREATE TABLE unit
-(
-    id           BIGINT      NOT NULL AUTO_INCREMENT,
-    name         VARCHAR(25) NOT NULL,
-    abbreviation VARCHAR(5)  NOT NULL,
-    PRIMARY KEY (id)
-);
+# DROP TABLE IF EXISTS unit;
+# CREATE TABLE unit
+# (
+#     id           BIGINT      NOT NULL AUTO_INCREMENT,
+#     name         VARCHAR(25) NOT NULL,
+#     abbreviation VARCHAR(5)  NOT NULL,
+#     PRIMARY KEY (id)
+# );
 
 DROP TABLE IF EXISTS ingredient;
 CREATE TABLE ingredient

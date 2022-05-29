@@ -1,5 +1,6 @@
 package kharlacz.springapp.recipe.category;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -7,11 +8,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity(name = "recipe_category")
-@NoArgsConstructor
-@Getter
-@Setter
-public class RecipeCategory {
+@AllArgsConstructor
+public enum RecipeCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
