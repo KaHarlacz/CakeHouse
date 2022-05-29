@@ -15,7 +15,6 @@ function MainPage() {
 		<div className='main-page'>
 			<NavBar />
 			<HeroImage />
-            <p>{process.env.REACT_APP_CAKEHOUSE_BACKEND_URL}</p>
 			<div className='content-wrapper'>
 				<HorizontalSeparator text='recently added' />
 				<div className='newest-top'>{!loading && <RecipePreview recipe={recipes[0]} layout='top-bottom' />}</div>
