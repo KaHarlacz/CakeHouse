@@ -10,9 +10,9 @@ Requirements:
   - Installed docker
 
 Instructions:
-  1. Clone the project using ```https://github.com/KaHarlacz/CakeHouse.git```
-  2. Change directory using ```cd CakeHouse```
-  3. Run command ```./run.sh```
+  1. Clone the project using ```git clone https://github.com/KaHarlacz/CakeHouse.git```
+  3. Change directory using ```cd CakeHouse```
+  4. Run command ```./run.sh```
 
 Notes:
   - At the beginning docker may print some errors if app hasn't been run on your computer yet.
