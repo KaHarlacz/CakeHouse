@@ -2,54 +2,66 @@
 @import './../../reset';
 
 .main-page {
+	display: flex;
+	flex-direction: column;
+	justify-content: stretch;
+
 	.content-wrapper {
 		width: 95%;
 		max-width: 1400px;
 		margin: auto;
 	}
 
-	.newest-container {
-		display: flex;
-		justify-content: center;
-		flex-wrap: wrap;
+	.newest-top {
+		margin: auto;
+		max-width: 1000px;
+	}
 
-		@media screen and (min-width: 992px) {
-			.newest-left {
-				width: 53%;
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-			}
+	.newest-bottom {
+        display: flex;
+        flex-wrap: wrap;
 
-			.newest-right {
-				width: 47%;
-			}
+		.recipe-preview-side-by-side {
+            margin: auto;
+			margin-top: 20px;
+            max-width: 600px;
+            max-height: 250px;
 		}
 	}
 
-	.top-rated {
-		display: flex;
-
-		:nth-child(1).recipe-entries-container {
-			padding-right: 4px;
+    .top-rated {
+        display: flex;
+        flex-wrap: wrap;
+        .recipe-preview-top-bottom {
+            margin: auto;
+			margin-top: 20px;
+            max-width: 600px;
 		}
-
-		:nth-child(2).recipe-entries-container {
-			padding-left: 4px;
-			border-left: 1px solid rgba(0, 0, 0, 0.2);
-		}
-
-    .side-by-side-recipe-entry {
-      margin-top: 10px;
     }
-	}
 
-	@media (max-width: 1070px) {
-		.top-rated {
-			flex-wrap: wrap;
-			.recipe-entries-container {
-				width: 100%;
-			}
-		}
-	}
+	// .top-rated {
+	// 	display: flex;
+
+	// 	:nth-child(1).recipe-previews-container {
+	// 		padding-right: 4px;
+	// 	}
+
+	// 	:nth-child(2).recipe-previews-container {
+	// 		padding-left: 4px;
+	// 		border-left: 1px solid rgba(0, 0, 0, 0.2);
+	// 	}
+
+	// 	.side-by-side-recipe-entry {
+	// 		margin-top: 10px;
+	// 	}
+	// }
+
+	// @media (max-width: 1070px) {
+	// 	.top-rated {
+	// 		flex-wrap: wrap;
+	// 		.recipe-previews-container {
+	// 			width: 100%;
+	// 		}
+	// 	}
+	// }
 }

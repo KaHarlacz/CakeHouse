@@ -1,10 +1,10 @@
 package kharlacz.springapp.recipe;
 
-import kharlacz.springapp.recipe.category.CategoryDtoMapper;
 import kharlacz.springapp.recipe.comment.CommentDtoMapper;
+import kharlacz.springapp.recipe.ingredient.IngredientQuantityDto;
 import kharlacz.springapp.recipe.services.dto.RecipeDetails;
-import kharlacz.springapp.recipe.ingredient.IngredientDtoMapper;
 
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class RecipeEntryDetailsMapper {
@@ -12,14 +12,9 @@ public class RecipeEntryDetailsMapper {
     public static RecipeDetails map(Recipe recipe) {
         final var ingredients = recipe.getIngredients()
                 .stream()
-                .map(IngredientDtoMapper::map)
+                .map(IngredientQuantityDto::from)
                 .collect(Collectors.toSet());
-        
-        final var categories = recipe.getCategories()
-                .stream()
-                .map(CategoryDtoMapper::map)
-                .collect(Collectors.toSet());
-        
+
         final var comments = recipe.getComments()
                 .stream()
                 .map(CommentDtoMapper::map)
@@ -35,7 +30,7 @@ public class RecipeEntryDetailsMapper {
                 .prepMethod(recipe.getPrepMethod())
                 .rating(recipe.getRating())
                 .ingredients(ingredients)
-                .categories(categories)
+                .categories(Set.of(recipe.getCategory()))
                 .comments(comments)
                 .build();
     }

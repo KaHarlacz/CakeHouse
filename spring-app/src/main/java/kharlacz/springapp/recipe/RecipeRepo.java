@@ -1,5 +1,8 @@
 package kharlacz.springapp.recipe;
 
+import kharlacz.springapp.recipe.category.RecipeCategory;
+import kharlacz.springapp.recipe.ingredient.Ingredient;
+import kharlacz.springapp.recipe.ingredient.IngredientWithQuantity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -35,12 +38,17 @@ public interface RecipeRepo extends PagingAndSortingRepository<Recipe, Long> {
     
     @Query(value = """
             SELECT DISTINCT r FROM Recipe r
-            JOIN r.categories rc
-            WHERE LOWER(r.name) LIKE %?1% AND rc.name LIKE %?2%
+            WHERE LOWER(r.name) LIKE %?1% AND (?2 = r.category OR ?2 IS NULL)
     """)
-    Page<Recipe> findByQueryAndCategory(String query, String category, PageRequest pageReq);
+    Page<Recipe> findByQueryAndCategory(String query, RecipeCategory category, PageRequest pageReq);
     
     Optional<Recipe> findFirstByAuthor_UsernameOrderByRating(String username);
     
     int countRecipesByAuthor_Username(String username);
+
+    @Query(value = """
+        SELECT r.ingredients FROM Recipe r
+    """)
+    List<IngredientWithQuantity> findAllAvailableIngredients();
+    
 }

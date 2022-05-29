@@ -1,10 +1,7 @@
 package kharlacz.springapp.recipe.ingredient;
 
 import kharlacz.springapp.recipe.Recipe;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -12,6 +9,8 @@ import java.io.Serializable;
 
 @Entity(name = "recipe_to_ingredient")
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Setter
 @Getter
 public class IngredientWithQuantity {
@@ -29,10 +28,17 @@ public class IngredientWithQuantity {
     @Min(0)
     private double quantity;
     
+    public static IngredientWithQuantity from(
+            Recipe recipe, Ingredient ingr, double quantity) {
+        var id = new IngredientWithQuantityId(recipe.getId(), ingr.getId());
+        return new IngredientWithQuantity(id, recipe, ingr, quantity);
+    }
+    
     @Embeddable
     @EqualsAndHashCode
     @Setter
     @NoArgsConstructor
+    @AllArgsConstructor
     public static class IngredientWithQuantityId implements Serializable {
         @Column(name = "recipe_id")
         protected Long recipeId;

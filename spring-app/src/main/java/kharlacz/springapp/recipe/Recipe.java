@@ -14,6 +14,7 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.hibernate.annotations.CascadeType.*;
 
@@ -27,14 +28,23 @@ public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     private String name;
+    
+    @Enumerated(EnumType.STRING)
+    RecipeCategory category;
+    
     @Column(name = "description")
     private String desc;
+    
     @Column(name = "prep_method")
     private String prepMethod;
+    
     private Integer rating;
+    
     @Column(name = "date_added")
     private Date dateAdded;
+    
     @Lob
     @Column(name = "image")
     private String imageB64;
@@ -45,32 +55,19 @@ public class Recipe {
 
     @ManyToOne
     private User author;
-
-    @ManyToMany()
-    @JoinTable(name = "recipe_to_recipe_category",
-            joinColumns = @JoinColumn(name = "recipe_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "recipe_category_id", referencedColumnName = "id")
-    )
-    private Set<RecipeCategory> categories;
     
     @OneToMany(mappedBy = "targetRecipe")
-    private Set<Comment> comments;
+    private Set<Comment> comments = new HashSet<>();
     
-    // TODO:
     public static Recipe from(UploadRecipeCommand recipeCmd) {
-        var categories = 
-        
         return Recipe.builder()
-                .categories(recipeCmd.categories())
-                .rating(0)
+                .name(recipeCmd.name())
+                .category(recipeCmd.category())
                 .desc(recipeCmd.desc())
                 .prepMethod(recipeCmd.prepMethod())
-                .imageB64(recipeCmd.imageB64())
-                .ingredients(recipeCmd.ingredientToQuantity().entrySet().stream()
-                        .map(entry -> new IngredientWithQuantity(new Ingredient(null, 
-                                entry.getKey(), Unit),
-                                entry.getValue())))
+                .rating(0)
                 .dateAdded(new Date())
+                .imageB64(recipeCmd.imageB64())
                 .build();
     }
 }

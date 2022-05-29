@@ -1,29 +1,49 @@
 # CakeHouse
 
-This app is an implementation of a website that allows users to share, discover and vote for their favorite recipes. It's the first app that I wrote using the Spring framework and React.
+This app is an implementation of website that allows users to share, discover and vote for their favourite recipes. 
+My goal was to learn how to build such app from end to end using popular technologies
+such as Spring, React and Docker.
 
 ## How to run this app
 
-At this stage, it is possible to run this app on your machine but there is no database configured to store data. I will make this app run in docker containers which will solve this problem.
+Requirements:
+  - Installed docker
 
-## Patterns used
+Instructions:
+  1. Clone the project using ```https://github.com/KaHarlacz/CakeHouse.git```
+  2. Change directory using ```cd CakeHouse```
+  3. Run command ```./run.sh```
 
-Design patterns: 
+Notes:
+  - At the beginning docker may print some errors if app hasn't been run on your computer yet.
+  - Spring boot container may fail if mysql is not ready. In such case backend will be restarted automatically.
+
+## What I have learnt
+
+#### Design patterns: 
   - Adapter
   - Decorator
   - Facade
   - Builder
   - Strategy
   - Singleton
-  
-Architecture: 
-  - MVP
 
-Others:
-  - DTO
-  - Repository
+#### Technologies / Libs / Techniques:
+  - React, React Router
+  - HTML, CSS, SCSS
+  - Bootstrap
+  - Spring, Spring Boot
+  - JWT Tokens
+  - Docker
+  - Hibernate
+  - Liquibase
 
-## Screenshots
+#### UI Design:
+  - Grid and FlexBox basics
+  - How parallax effect works
+  - How to implement infinite scrolling
+
+## Some screenshots
 
 ### Main Page
 

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,11 +12,9 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class RecipeCategoryService {
 
-    private final RecipeCategoryRepo categoryRepo;
-
     public List<String> getCategoriesNames() {
-        return categoryRepo.findAll().stream()
-                .map(RecipeCategory::getName)
+        return Arrays.stream(RecipeCategory.values())
+                .map(RecipeCategory::name)
                 .collect(Collectors.toList());
     }
 }

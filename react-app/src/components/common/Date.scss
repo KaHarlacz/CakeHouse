@@ -2,15 +2,13 @@
 	display: inline-flex;
 
 	.icon {
-		display: inline-flex;
-		align-self: center;
 		height: 2em;
 		width: 2em;
 	}
 
 	.date-string {
+        font-size: 1em;
 		margin: 0 3px;
-		transform: translateY(+0.4em);
 		font-weight: 500;
 	}
 }

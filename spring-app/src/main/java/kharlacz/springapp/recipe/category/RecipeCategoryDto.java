@@ -1,13 +1,8 @@
 package kharlacz.springapp.recipe.category;
 
-import lombok.*;
-
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-public final class RecipeCategoryDto {
-    private Long id;
-    private String name;
+public record RecipeCategoryDto(String name) {
+    
+    public static RecipeCategoryDto from(RecipeCategory category) {
+        return new RecipeCategoryDto(category.name());
+    }
 }

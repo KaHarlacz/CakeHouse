@@ -1,10 +1,4 @@
-docker stop cake_house_frontend
-docker stop cake_house_backend
-docker stop cake_house_mysql
 
-docker container rm cake_house_mysql
-docker container rm cake_house_backend
-docker container rm cake_house_frontend
 
 docker pull mysql:8.0
 docker build -t cake_house_backend spring-app

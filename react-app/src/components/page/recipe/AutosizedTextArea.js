@@ -1,14 +1,18 @@
 import { useRef } from 'react';
 import './AutosizedTextArea.scss';
 
-export default function AutosizedTextArea() {
+export default function AutosizedTextArea(props) {
+	const { onChange } = props;
 	const textArea = useRef();
 	return (
 		<textarea
 			className='autosized-text-area'
 			placeholder='Type preparation here'
 			rows={1}
-			onKeyDown={() => autosize(textArea.current)}
+			onKeyDown={e => {
+				autosize(textArea.current);
+				onChange(e.target.value);
+			}}
 			ref={textArea}
 		></textarea>
 	);

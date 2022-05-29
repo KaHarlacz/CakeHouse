@@ -1,12 +1,26 @@
 @import './../../main';
 @import './../../reset';
 
-.content-wrapper {
-	margin: auto;
-	max-width: 1200px;
-}
+.discover-page {
+	.content-wrapper {
+		margin: auto;
+		max-width: 1200px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 
-.result-entries {
-	margin: auto;
-	width: 80%;
+		.recipe-preview-top-bottom {
+			margin: auto;
+			width: 60%;
+			max-width: 600px;
+		}
+
+		.spinner-border {
+			width: 60px;
+			height: 60px;
+			stroke-width: 10px;
+			margin: auto;
+			color: #b68282;
+		}
+	}
 }

@@ -6,7 +6,7 @@ export default function Footer(props) {
 				<div className='newsletter'>
 					<div className='content'>
 						<h4>SING UP FOR OUR NEWSLETTER</h4>
-						<p>Enter your email address in order to get news from our page.</p>
+						<p>Type your email bellow</p>
 						<input />
 					</div>
 				</div>

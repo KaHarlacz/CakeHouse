@@ -3,6 +3,11 @@
 	display: flex;
 	flex-direction: column;
 
+	.content-wrapper {
+		max-width: 1400px;
+		margin: auto;
+	}
+
 	.recipe-header {
 		width: 80%;
 		margin: auto;
@@ -15,6 +20,7 @@
 		}
 
 		.desc-input {
+			width: 300px;
 			font-size: 1em;
 			font-weight: 500;
 			text-align: center;
@@ -57,5 +63,38 @@
 
 	input:focus {
 		outline: 0;
+	}
+
+	.ingredient-list {
+		border-collapse: collapse;
+		margin: auto;
+		margin-top: 40px;
+
+		td,
+		th {
+			border: 1px solid black;
+			padding: 10px;
+			text-align: center;
+		}
+
+		th:first-child,
+		th:last-child,
+		td:last-child,
+		td:first-child {
+			border: none;
+			padding: 0;
+			width: 50px;
+			align-items: center;
+		}
+
+		.icon {
+			height: 30px;
+			opacity: 0.7;
+		}
+
+		.icon:hover {
+			opacity: 1;
+			cursor: pointer;
+		}
 	}
 }

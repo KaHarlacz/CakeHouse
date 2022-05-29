@@ -1,102 +1,68 @@
-import React, { useEffect, useState } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import NavBar from '../util/NavBar';
-import fetchNewestEntries, { fetchCategories } from './../FetchActions';
-import { fetchCategoryEntries } from './../FetchActions';
 import './DiscoverPage.scss';
 import SearchBar from '../util/SearchBar';
-import SelectableBoxes from '../util/SelectableBoxes';
-import RecipeEntriesContainer from '../../recipe/RecipeEntriesContainer';
-import HorizontalSeparator from '../../section-separator/HorizontalSeparator';
 import Footer from '../util/Footer';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import useRecipesSearch from './useRecipesSearch';
+import RecipePreview from '../../recipe/RecipePreview';
+import { Spinner } from 'react-bootstrap';
+import CategoryBoxes from './CategoryBoxes';
 
-export default class DiscoverPage extends React.Component {
-	constructor(props) {
-		super(props);
+export default function DiscoverPage() {
+	const [query, setQuery] = useState('');
+	const [category, setCategory] = useState('');
+	const [pageNumber, setPageNumber] = useState(0);
+	const sortBy = 'rating';
+	const size = 5;
 
-		this.state = {
-			categories: [],
-			allEntries: [],
-			visibleEntries: [],
-			searchLabel: 'Search in All',
-			searchInput: '',
-		};
+	const { recipes, hasMore, loading, error } = useRecipesSearch(query, category, pageNumber, size, sortBy);
+
+	const observer = useRef();
+	const afterLastRecipe = useCallback(
+		node => {
+			if (loading) return;
+			if (observer.current) observer.current.disconnect();
+			observer.current = new IntersectionObserver(entries => {
+				if (entries[0].isIntersecting && hasMore) {
+					setPageNumber(prevPageNumber => prevPageNumber + 1);
+				}
+			});
+			if (node) observer.current.observe(node);
+		},
+		[loading, hasMore]
+	);
+
+	function handleSearch(e) {
+		setQuery(e.target.value);
+		setPageNumber(0);
 	}
 
-	componentDidMount() {
-		fetchCategories()
-			.then(data => this.setState({ categories: data }))
-			.catch(err => console.log(err));
-
-		fetchNewestEntries()
-			.then(data => this.setState({ visibleEntries: data, allEntries: data }))
-			.catch(err => console.log(err));
+	function handleChangeCategory(categoryName) {
+		setCategory(categoryName);
+		setPageNumber(0);
 	}
 
-	render() {
-		let categoriesLabels = ['All'];
-		this.state.categories.forEach(cat => {
-			console.log(cat);
-			categoriesLabels.push(cat.name);
-		});
-
-		return (
-			<div className='discover-page'>
-				<NavBar />
-				<div className='content-wrapper'>
-					<SearchBar
-						placeholder={this.state.searchLabel}
-						searchInput={this.state.searchInput}
-						onSearch={text => {
-							if (!text) {
-								this.setState({ visibleEntries: this.state.allEntries });
-							}
-
-							const filtered = this.state.allEntries.filter(entry => {
-								console.log('entry');
-								console.log(entry);
-								return entry.name.includes(text) || entry.desc.includes(text) || entry.author.includes(text);
-							});
-
-							this.setState({ visibleEntries: filtered });
-						}}
-					/>
-					<SelectableBoxes
-						labels={categoriesLabels}
-						onClick={label => {
-							const newSearchLabel = 'Search in ' + label;
-							this.setState({ searchLabel: newSearchLabel, searchInput: '' });
-
-							if (label === 'All') {
-								fetchNewestEntries()
-									.then(data => this.setState({ visibleEntries: data, allEntries: data }))
-									.catch(err => console.log(err));
-							} else {
-								const categoryId = this.state.categories.filter(el => el.name === label)[0].id;
-								fetchCategoryEntries(categoryId)
-									.then(data => this.setState({ visibleEntries: data, allEntries: data }))
-									.catch(err => console.log(err));
-							}
-						}}
-					/>
-					<HorizontalSeparator />
-					<div className='result-entries'>
-						<RecipeEntriesContainer entries={this.state.visibleEntries} />
-					</div>
-				</div>
-				<Footer />
+	return (
+		<div className='discover-page'>
+			<NavBar />
+			<div className='content-wrapper'>
+				<SearchBar onChange={handleSearch} />
+				<CategoryBoxes includeAny={true} clickable={true} onClick={handleChangeCategory} />
+				{recipes.map((recipe, index) => {
+					if (recipes.length === index + 1) {
+						return [
+							<RecipePreview recipe={recipe} key={index} />,
+							<div ref={afterLastRecipe} key={index + recipes.length}></div>,
+						];
+					} else {
+						return <RecipePreview recipe={recipe} key={index} />;
+					}
+				})}
+				{loading && <Spinner animation='border' />}
+				{error && <p>Error occured :(</p>}
 			</div>
-		);
-	}
-
-	filterEntries(text) {
-		if (!text) {
-			this.setState({ visibleEntries: this.state.allEntries });
-		}
-
-		const filtered = this.state.allEntries.filter(entry => {
-			return entry.name.contains(text) || entry.desc.contains(text) || entry.author.contains(text);
-		});
-
-		this.setState({ visibleEntries: filtered });
-	}
+			<Footer />
+		</div>
+	);
 }

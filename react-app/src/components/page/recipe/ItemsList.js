@@ -27,7 +27,7 @@ export default function ItemsList(props) {
 	};
 
 	const deleteRow = indexToDelete => {
-		setItems(items.filter((val, idx) => idx != indexToDelete));
+		setItems(items.filter((val, idx) => idx !== indexToDelete));
 	};
 
 	for (let i = 0; i < items.length; i++) {
@@ -39,10 +39,10 @@ export default function ItemsList(props) {
 					items[i][idx] = event.target.value;
 					setItems(items);
 				}}
-				minusButton={editable & (i != items.length - 1)}
-				plusButton={editable & (i == items.length - 1)}
-				minusAction={editable & (i != items.length - 1) ? deleteRow : () => {}}
-				plusAction={editable & (i == items.length - 1) ? addRow : () => {}}
+				minusButton={editable & (i !== items.length - 1)}
+				plusButton={editable & (i === items.length - 1)}
+				minusAction={editable & (i !== items.length - 1) ? deleteRow : () => {}}
+				plusAction={editable & (i === items.length - 1) ? addRow : () => {}}
 				placeholder={placeholder}
 			/>
 		);

@@ -21,30 +21,12 @@ CREATE TABLE ban
         ON DELETE CASCADE
 );
 
-# DROP TABLE IF EXISTS unit;
-# CREATE TABLE unit
-# (
-#     id           BIGINT      NOT NULL AUTO_INCREMENT,
-#     name         VARCHAR(25) NOT NULL,
-#     abbreviation VARCHAR(5)  NOT NULL,
-#     PRIMARY KEY (id)
-# );
-
 DROP TABLE IF EXISTS ingredient;
 CREATE TABLE ingredient
 (
     id      BIGINT       NOT NULL AUTO_INCREMENT,
     name    VARCHAR(255) NULL DEFAULT NULL,
-    unit_id BIGINT       NULL DEFAULT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (unit_id) REFERENCES unit (id)
-);
-
-DROP TABLE IF EXISTS recipe_category;
-CREATE TABLE recipe_category
-(
-    id   BIGINT      NOT NULL AUTO_INCREMENT,
-    name VARCHAR(15) NULL DEFAULT NULL,
+    unit    VARCHAR(50)  NULL DEFAULT NULL,
     PRIMARY KEY (id)
 );
 
@@ -57,6 +39,7 @@ CREATE TABLE recipe
     prep_method VARCHAR(2000) NOT NULL,
     image       LONGTEXT      NULL DEFAULT NULL,
     name        VARCHAR(255)  NOT NULL UNIQUE,
+    category    VARCHAR(50)   NOT NULL,
     rating      INT           NULL DEFAULT NULL,
     date_added  DATE          NULL DEFAULT NULL,
     PRIMARY KEY (id),
@@ -72,16 +55,6 @@ CREATE TABLE recipe_to_ingredient
     PRIMARY KEY (ingredient_id, recipe_id),
     FOREIGN KEY (ingredient_id) REFERENCES ingredient (id),
     FOREIGN KEY (recipe_id) REFERENCES recipe (id)
-);
-
-DROP TABLE IF EXISTS recipe_to_recipe_category;
-CREATE TABLE recipe_to_recipe_category
-(
-    recipe_id          BIGINT NOT NULL,
-    recipe_category_id BIGINT NOT NULL,
-    PRIMARY KEY (recipe_id, recipe_category_id),
-    FOREIGN KEY (recipe_id) REFERENCES recipe (id),
-    FOREIGN KEY (recipe_category_id) REFERENCES recipe_category (id)
 );
 
 DROP TABLE IF EXISTS comment;

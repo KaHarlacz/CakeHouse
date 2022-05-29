@@ -1,24 +1,31 @@
 version: "3.8"
 services:
   cakehouse-db:
+    container_name: cakehouse-database
     image: mysql:latest
-    ports:
-      - 3307:3306
     environment:
       - MYSQL_ROOT_PASSWORD=root
-    container_name: cakehouse-database
   
   cakehouse-backend:
+    container_name: cakehouse-backend
     image: cakehouse-backend:latest
+    # Passing inner port of db
     environment:
-      - DATABASE_URL=$DATABASE_URL
-      - DATABASE_DIALECT=$DATABASE_DIALECT
+      - DATABASE_URL=mysql://root:root@cakehouse-db:3306/cakehouse?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=True
+    # When db is not ready backend may fail
     ports:
       - 8080:8080
-    depends_on:
+    restart: always
+    links:
       - cakehouse-db
-    container_name: cakehouse-backend
 
   cakehouse-frontend:
+    container_name: cakehouse-frontend
     image: cakehouse-frontend:latest
+    ports:
+      - 3001:3000
+    # TODO: Make inner network 
     environment:
+      - REACT_APP_CAKEHOUSE_BACKEND_URL=http://localhost:8080
+    links:
+      - cakehouse-backend

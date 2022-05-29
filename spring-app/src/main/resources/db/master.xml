@@ -34,16 +34,6 @@
       <column name="cause"/>
     </loadUpdateData>
 
-    <loadUpdateData file="/data/units.csv"
-                    primaryKey="id"
-                    quotchar="'"
-                    relativeToChangelogFile="true"
-                    tableName="unit">
-      <column name="id"/>
-      <column name="name"/>
-      <column name="abbreviation"/>
-    </loadUpdateData>
-
     <loadUpdateData file="/data/recipes.csv"
                     primaryKey="id"
                     quotchar="'"
@@ -57,33 +47,6 @@
       <column name="rating"/>
       <column name="date_added"/>
       <column name="image"/>
-    </loadUpdateData>
-
-    <loadUpdateData file="/data/recipe_categories.csv"
-                    primaryKey="id"
-                    quotchar="'"
-                    relativeToChangelogFile="true"
-                    tableName="recipe_category">
-      <column name="id"/>
-      <column name="name"/>
-    </loadUpdateData>
-
-    <loadUpdateData file="/data/recipes_to_recipe_categories.csv"
-                    primaryKey="recipe_id,recipe_category_id"
-                    quotchar="'"
-                    relativeToChangelogFile="true"
-                    tableName="recipe_to_recipe_category">
-      <column name="recipe_id"/>
-      <column name="recipe_category_id"/>
-    </loadUpdateData>
-
-    <loadUpdateData file="/data/recipe_categories.csv"
-                    primaryKey="id"
-                    quotchar="'"
-                    relativeToChangelogFile="true"
-                    tableName="recipe_category">
-      <column name="id"/>
-      <column name="name"/>
     </loadUpdateData>
 
     <loadUpdateData file="/data/comments.csv"
@@ -105,7 +68,7 @@
                     tableName="ingredient">
       <column name="id"/>
       <column name="name"/>
-      <column name="unit_id"/>
+      <column name="unit"/>
     </loadUpdateData>
 
     <loadUpdateData file="/data/recipes_to_ingredients.csv"

@@ -2,13 +2,13 @@
 	display: inline-flex;
 
 	.icon {
-		height: 1.6em;
-		width: 2em;
+		height: 1.5em;
+		width: 1.5em;
+        margin: 0 3px 0;
 	}
 
 	.votes-counter {
-    font-size: 1.1em;
-    transform: translateY(+0.1em);
+		font-size: 1.1em;
 		font-weight: 500;
 	}
 }

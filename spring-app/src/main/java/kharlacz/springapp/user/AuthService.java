@@ -11,21 +11,19 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 public class AuthService {
 
-    private final UserRepo userRepo;
-    
     public static final int TOKEN_EXP_TIME = 900000;
+    private final UserRepo userRepo;
 
     public AuthRes login(AuthReq authReq) {
         var user = userRepo
                 .findByUsernameAndPassword(authReq.username(), authReq.password())
                 .orElseThrow(() -> new AuthException("Provided password doesn't match username"));
-        
+
         var jwtToken = generateJwtToken(user.getUsername());
         return new AuthRes(jwtToken, new Date(System.currentTimeMillis() + TOKEN_EXP_TIME));
     }

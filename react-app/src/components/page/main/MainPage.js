@@ -1,44 +1,34 @@
-import RecipeEntriesContainer from '../../recipe/RecipeEntriesContainer';
 import HeroImage from '../util/HeroImage';
 import NavBar from '../util/NavBar';
 import HorizontalSeparator from '../../section-separator/HorizontalSeparator';
-import fetchNewestEntries from '../FetchActions';
-import { useEffect, useState } from 'react';
 import './MainPage.scss';
-import SimpleRecipeEntry from '../../recipe/SimpleRecipeEntry';
 import Footer from '../util/Footer';
+import useRecipesSearch from '../discover/useRecipesSearch';
+import RecipePreview from '../../recipe/RecipePreview';
 
 require('dotenv').config();
 
-function MainPage(props) {
-	let [newest, setNewest] = useState([]);
-
-	useEffect(() => {
-		fetchNewestEntries()
-			.then(data => setNewest(data))
-			.catch(err => console.log(err));
-	}, [setNewest]);
-
-  console.log(process.env)
+function MainPage() {
+	const { recipes, loading } = useRecipesSearch('', '', 0, 15, 'dateAdded');
 
 	return (
 		<div className='main-page'>
 			<NavBar />
 			<HeroImage />
+            <p>{process.env.REACT_APP_CAKEHOUSE_BACKEND_URL}</p>
 			<div className='content-wrapper'>
 				<HorizontalSeparator text='recently added' />
-				<div className='newest-container'>
-					<div className='newest-left'>
-						<RecipeEntriesContainer entries={newest.slice(0, 1)} entryType='simple' />
-					</div>
-					<div className='newest-right'>
-						<RecipeEntriesContainer entries={newest.slice(1, 4)} />
-					</div>
+				<div className='newest-top'>{!loading && <RecipePreview recipe={recipes[0]} layout='top-bottom' />}</div>
+				<div className='newest-bottom'>
+					{recipes.slice(1, 5).map(recipe => {
+						return <RecipePreview recipe={recipe} layout='side-by-side' key={recipe.id} />;
+					})}
 				</div>
 				<HorizontalSeparator text='top rated' />
 				<div className='top-rated'>
-					<RecipeEntriesContainer entries={newest.slice(4, 8)} />
-					<RecipeEntriesContainer entries={newest.slice(8, 12)} />
+					{recipes.slice(6, recipes.length).map(recipe => {
+						return <RecipePreview recipe={recipe} layout='top-bottom' key={recipe.id} />;
+					})}
 				</div>
 			</div>
 			<Footer />

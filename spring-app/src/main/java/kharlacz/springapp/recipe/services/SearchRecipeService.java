@@ -1,8 +1,8 @@
 package kharlacz.springapp.recipe.services;
 
 import kharlacz.springapp.recipe.RecipeRepo;
-import kharlacz.springapp.recipe.services.dto.RecipePreview;
 import kharlacz.springapp.recipe.services.commands.SearchRecipeCommand;
+import kharlacz.springapp.recipe.services.dto.RecipePreview;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,10 +23,10 @@ public class SearchRecipeService {
             searchCmd = searchCmd.with()
                     .sortBy("dateAdded").build();
         }
-        
+
         var pageReq = PageRequest.of(
                 searchCmd.page(), searchCmd.size(), DESC, searchCmd.sortBy());
-        
+
         return recipeRepo.findByQueryAndCategory(
                 searchCmd.query().toLowerCase(Locale.ROOT),
                 searchCmd.category(),

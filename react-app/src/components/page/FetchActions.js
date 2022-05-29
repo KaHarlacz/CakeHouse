@@ -1,7 +1,5 @@
-import { getUserId } from './CreditentialsActions';
-
-export default function fetchNewestEntries() {
-	return fetchEntries(`${process.env.REACT_APP_CAKEHOUSE_BACKEND_URL}/recipes/newest`);
+export default function fetchNewestEntries(page, size) {
+	return fetchEntries(`${process.env.REACT_APP_CAKEHOUSE_BACKEND_URL}/recipes/newest?page=${page}&size=${size}`);
 }
 
 export function fetchTopRatedEntries() {
@@ -53,7 +51,6 @@ function transformRecipe(data) {
 function fetchEntries(url) {
 	const encodedCreditentials = btoa('James123:1234');
 
-	console.log(encodedCreditentials);
 	return new Promise((resolve, reject) => {
 		fetch(url, {
 			mode: 'cors',
@@ -87,13 +84,4 @@ function transformEntries(data) {
 
 function base64ToImage(b64String) {
 	return `data:image/png;base64,${b64String}`;
-}
-
-export function fetchUserStats() {
-	return new Promise((resolve, reject) => {
-		fetch(`${process.env.REACT_APP_CAKEHOUSE_BACKEND_URL}/users/${getUserId()}/stats`)
-			.then(res => res.json())
-			.then(resolve)
-			.catch(reject);
-	});
 }

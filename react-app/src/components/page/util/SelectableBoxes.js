@@ -1,38 +1,24 @@
+import { useState } from 'react';
 import './SelectableBoxes.scss';
 
 export default function SelectableBoxes(props) {
-	let boxes = [];
-	props.labels.forEach((label) => {
-		boxes.push(
-			<p
-				className='box'
-				onClick={(event) => {
-					handleClick(event.target);
-					props.onClick(event.target.innerHTML);
-				}}
-			>
-				{label}
-			</p>
-		);
-	});
+	const { labels, onClick } = props;
+	const [selected, setSelected] = useState(0);
 
-	const firstBox = document.querySelector(
-		'.selectable-boxes .box:nth-child(1)'
+	const handleClick = key => {
+		setSelected(key);
+		if (onClick) onClick(labels[key]);
+	};
+
+	return (
+		<div className='selectable-boxes'>
+			{labels?.map((label, index) => {
+				return (
+					<p className={`box ${selected === index ? 'selected' : ''}`} onClick={event => handleClick(index)} key={index}>
+						{label}
+					</p>
+				);
+			})}
+		</div>
 	);
-
-	const selectedBox = document.querySelector(
-		'.selectable-boxes [class="box selected"]'
-	);
-
-	if (firstBox && !selectedBox) {
-		firstBox.classList.add('selected');
-	}
-
-	return <div className='selectable-boxes'>{boxes}</div>;
-}
-
-function handleClick(clicked) {
-	const boxes = document.querySelectorAll('.selectable-boxes .box');
-	boxes.forEach((box) => box.classList.remove('selected'));
-	clicked.classList.add('selected');
 }

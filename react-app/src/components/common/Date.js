@@ -6,13 +6,11 @@ function Date(props) {
 			<p>
 				<svg
 					xmlns='http://www.w3.org/2000/svg'
-					class='icon icon-tabler icon-tabler-calendar-event'
-					viewBox='0 0 24 24'
-					stroke-width='1.5'
+					className='icon icon-tabler icon-tabler-calendar-event'
 					stroke='#6f32be'
 					fill='none'
-					stroke-linecap='round'
-					stroke-linejoin='round'
+					strokeLinecap='round'
+					strokeLinejoin='round'
 				>
 					<path stroke='none' d='M0 0h24v24H0z' fill='none' />
 					<rect x='4' y='5' width='16' height='16' rx='2' />
@@ -22,7 +20,7 @@ function Date(props) {
 					<rect x='8' y='15' width='2' height='2' />
 				</svg>
 			</p>
-			<p className='date-string'>{props.date}</p>
+			<p className='date-string'>{props?.date}</p>
 		</div>
 	);
 }

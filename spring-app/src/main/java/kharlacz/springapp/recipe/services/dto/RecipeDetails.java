@@ -1,8 +1,8 @@
 package kharlacz.springapp.recipe.services.dto;
 
-import kharlacz.springapp.recipe.category.RecipeCategoryDto;
+import kharlacz.springapp.recipe.category.RecipeCategory;
 import kharlacz.springapp.recipe.comment.CommentDto;
-import kharlacz.springapp.recipe.ingredient.IngredientDto;
+import kharlacz.springapp.recipe.ingredient.IngredientQuantityDto;
 import lombok.*;
 
 import java.util.Date;
@@ -22,7 +22,7 @@ public class RecipeDetails {
     private Integer rating;
     private Date dateAdded;
     private String imageB64;
-    private Set<IngredientDto> ingredients;
-    private Set<RecipeCategoryDto> categories;
+    private Set<IngredientQuantityDto> ingredients;
+    private Set<RecipeCategory> categories;
     private Set<CommentDto> comments;
 }

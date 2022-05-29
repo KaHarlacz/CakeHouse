@@ -7,6 +7,7 @@ const Thumbnail = props => (
 const Prompt = props => <span className='prompt'>Drop recipe image here</span>;
 
 export default function ImageUploadBox(props) {
+	const { onUpload } = props;
 	const fileInput = useRef(null);
 	const imageUploadBox = useRef(null);
 	const [thumbnail, setThumbnail] = useState();
@@ -35,6 +36,7 @@ export default function ImageUploadBox(props) {
 					reader.readAsDataURL(file);
 					reader.onload = () => {
 						setThumbnail(<Thumbnail dataLabel={file.name} bgcImageURL={`url('${reader.result}')`} />);
+						onUpload(reader.result);
 					};
 				}
 
